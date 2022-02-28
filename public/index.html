@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>My Firearms</title>
+  <!-- <documentation at http://demos.jquerymobile.com/1.4.1/ > -->
+
+  <link href='https://fonts.googleapis.com/css?family=Nova Flat' rel='stylesheet'>
+
+  <link rel="stylesheet" href="stylesheets/style.css" />
+  <link rel="stylesheet" href="stylesheets/themes/firearms.css" />
+  <link rel="stylesheet" href="stylesheets/themes/jquery.mobile.icons.min.css" />
+
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" /> 
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> 
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
+  <script src="javascripts/index.js"></script>
+  <!--<link rel="stylesheet" type="text/css" href="css/index.css">-->
+
+</head>
+
+<body>
+
+  <!-- Start of Home page -->
+  <div data-role="page" id="home">
+
+    <!--   page header -->
+    <div data-role="header" data-theme='a'>
+      <h1>My Firearms Collection</h1>
+      <div data-role="navbar" data-theme='a' id="nav_bar">
+        <ul>
+        <li><a href="#home" class="active-page">Home Page</a></li>
+        <li><a href="#addFirearm">Add a Firearm</a></li>
+        <li><a href="#ListAll">List All Firearms</a></li>
+        <li><a href="#ListOwned">List Owned Firearms</a></li>
+        <li><a href="#ListWanted">List Wanted Firearms</a></li>
+        </ul>
+      </div><!-- /navbar -->
+      <div class="myHeader">Your site to organize your firearm collection.</div>
+    </div>
+
+    <!--   page content -->
+    <div data-role="content" data-theme='a'>
+      <div class="newFont">
+        <!--
+        <div class="slides slowFade" id="slideShow">
+        </div>
+        -->
+        <h2> My Collection of Firearms</h2>
+        <p>This website will allow you to catalog your personal firearms collection as well as create a wishlist of firearms that you would like to add to your collection.</p>
+      </div>
+    </div>
+
+    <!--  page footer -->
+    <div data-role="footer" data-theme='a'>
+      <h1>Copyright &copy;2022 by KG7PNH</h1>
+    </div>
+  </div>
+  <!-- End of Home page -->
+
+  <!-- Start of Add Page -->
+  <div data-role="page" id="addFirearm">
+    <!--   page header -->
+    <div data-role="header" data-theme='a'>
+      <h1>My Firearms Collection</h1>
+      <div data-role="navbar" data-theme='a' id="nav_bar">
+        <ul>
+        <li><a href="#home">Home Page</a></li>
+        <li><a href="#addFirearm" class="active-page">Add a Firearm</a></li>
+        <li><a href="#ListAll">List All Firearms</a></li>
+        <li><a href="#ListOwned">List Owned Firearms</a></li>
+        <li><a href="#ListWanted">List Wanted Firearms</a></li>
+        </ul>
+      </div><!-- /navbar -->
+      <div class="myHeader">Your site to organize your firearm collection.</div>
+    </div>
+
+    <!-- page content -->
+    <div data-role="content" data-theme='a'>
+      <h1>Add a Firearm</h1>
+      <label for="inputManufacturer">Manufacturer</label>
+      <input type="text" value="" name="inputManufacturer" id="inputManufacturer" placeholder="Enter manufacturer's name"/>
+      <label for="inputModel">Model</label>
+      <input type="text" value="" name="inputModel" id="inputModel" placeholder="Enter model name" />
+      <label for="inputCalber">Caliber</label>
+      <select name="inputCaliber" id="inputCaliber">
+        <option value="">Select Caliber</option>
+      </select>
+      <label for="inputClass">Class</label>
+      <select name="inputClass" id="inputClass">
+        <option value="">Select Class</option>
+        <option value="Pistol">Pistol</option>
+        <option value="Rifle">Rifle</option>
+        <option value="Shotgun">Shotgun</option>
+      </select>
+      <input type="checkbox" id="inputOwned" class="inputOwned" value="Owned">
+      <label for="inputOwned">Owned</label>
+      <input type="checkbox" id="inputWanted" class="inputWanted" value="Wanted">
+      <label for="inputWanted">Wanted</label>
+      <input type="button" value="Click To Add Firearm" id="buttonAdd" data-inline="true" />
+      <input type="button" value="Clear Data" id="buttonClear" data-inline="true" />
+    </div>
+
+    <!--   page footer -->
+    <div data-role="footer" data-theme='a'>
+      <h1>Copyrigtht &copy;2022 by KG7PNH</h1>
+    </div>
+  </div>
+  <!-- End of Add page -->
+
+  <!-- Start of All Page -->
+  <div data-role="page" id="ListAll">
+    <!--   page header -->
+    <div data-role="header" data-theme='a'>
+      <h1>My Firearms Collection</h1>
+      <div data-role="navbar" data-theme='a' id="nav_bar">
+        <ul>
+        <li><a href="#home">Home Page</a></li>
+        <li><a href="#addFirearm">Add a Firearm</a></li>
+        <li><a href="#ListAll" class="active-page">List All Firearms</a></li>
+        <li><a href="#ListOwned">List Owned Firearms</a></li>
+        <li><a href="#ListWanted">List Wanted Firearms</a></li>
+        </ul>
+      </div><!-- /navbar -->
+      <div class="myHeader">Your site to organize your firearm collection.</div>
+    </div>
+
+    <!--   page content -->
+    <div data-role="content" data-theme='a'>
+      <p> Here are all of the firearms</p>
+      <div class="tableList" id="divAllFirearms">
+      <!-- list will be added here via createList() -->
+      </div>
+      <input type="button" value="Sort By Manufacturer" id="buttonSortManufacturer" data-inline="true" />
+      <input type="button" value="Sort By Caliber" id="buttonSortCaliber" data-inline="true" />
+      <input type="button" value="Sort By Class" id="buttonSortClass" data-inline="true" />
+    </div>
+
+    <!--   page footer -->
+    <div data-role="footer" data-theme='a'>
+      <h1>Copyrigtht &copy;2022 by KG7PNH</h1>
+    </div>
+  </div>
+  <!-- End of All page ------------------------------------------------------------------->
+
+  <!-- Start of Owned page -->
+  <div data-role="page" id="ListOwned">
+    <!--   page header -->
+    <div data-role="header" data-theme='a'>
+      <h1>My Firearms Collection</h1>
+      <div data-role="navbar" data-theme='a' id="nav_bar">
+        <ul>
+        <li><a href="#home">Home Page</a></li>
+        <li><a href="#addFirearm">Add a Firearm</a></li>
+        <li><a href="#ListAll">List All Firearms</a></li>
+        <li><a href="#ListOwned" class="active-page">List Owned Firearms</a></li>
+        <li><a href="#ListWanted">List Wanted Firearms</a></li>
+        </ul>
+      </div><!-- /navbar -->
+      <div class="myHeader">Your site to organize your firearm collection.</div>
+    </div>
+
+    <!--   page content -->
+    <div data-role="content" data-theme='a'>
+      <p> Here are my owned firearms</p>
+      <div class="tableList" id="divOwnedFirearms"></div>
+      <input type="button" value="All" id="buttonOwned" data-inline="true" />
+      <input type="button" value="Pistols" id="buttonOwnedPistol" data-inline="true" />
+      <input type="button" value="Rifles" id="buttonOwnedRifle" data-inline="true" />
+      <input type="button" value="Shotguns" id="buttonOwnedShotgun" data-inline="true" />
+    </div>
+  
+    <!--   page footer -->
+    <div data-role="footer" data-theme='a'>
+      <h1>Copyrigtht &copy;2022 by KG7PNH</h1>
+    </div>
+  </div>
+  </div>
+  <!-- End of Owned page -->
+
+
+  <!-- Start of Wanted page -->
+  <div data-role="page" id="ListWanted">
+    <!--   page header -->
+    <div data-role="header" data-theme='a'>
+      <h1>My Firearms Collection</h1>
+      <div data-role="navbar" data-theme='a' id="nav_bar">
+        <ul>
+        <li><a href="#home">Home Page</a></li>
+        <li><a href="#addFirearm">Add a Firearm</a></li>
+        <li><a href="#ListAll">List All Firearms</a></li>
+        <li><a href="#ListOwned">List Owned Firearms</a></li>
+        <li><a href="#ListWanted" class="active-page">List Wanted Firearms</a></li>
+        </ul>
+      </div><!-- /navbar -->
+      <div class="myHeader">Your site to organize your firearm collection.</div>
+    </div>
+
+    <!--   page content -->
+    <div data-role="content" data-theme='a'>
+      <p> Here are my wanted firearms</p>
+      <div class="tableList" id="divWantedFirearms"></div>
+      <input type="button" value="All" id="buttonWanted" data-inline="true" />
+      <input type="button" value="Pistols" id="buttonWantedPistol" data-inline="true" />
+      <input type="button" value="Rifles" id="buttonWantedRifle" data-inline="true" />
+      <input type="button" value="Shotguns" id="buttonWantedShotgun" data-inline="true" />
+    </div>
+
+    <!--   page footer -->
+    <div data-role="footer" data-theme='a'>
+      <h1>Copyrigtht &copy;2022 by KG7PNH</h1>
+    </div>
+  </div>
+  </div>
+  <!-- End of Wanted page -->
+
+
+  <!-- Start of Details page -->
+  <div data-role="page" id="Details">
+    <!--   page header -->
+    <div data-role="header" data-theme='a'>
+      <h1>My Firearms Collection</h1>
+      <div data-role="navbar" data-theme='a' id="nav_bar">
+        <ul>
+        <li><a href="#home" class='active-page'>Home Page</a></li>
+        <li><a href="#addFirearm">Add a Firearm</a></li>
+        <li><a href="#ListAll">List All Firearms</a></li>
+        <li><a href="#ListOwned">List Owned Firearms</a></li>
+        <li><a href="#ListWanted">List Wanted Firearms</a></li>
+        </ul>
+      </div><!-- /navbar -->
+      <div class="myHeader">Your site to organize your favorite movies.</div>
+    </div>
+  
+    <!--  content -->
+    <div data-role="content" data-theme='a'>
+      <p> Here are the details</p>
+      <p id="oneManufacturer"></p>
+      <p id="oneModel"></p>
+      <p id="oneCaliber"></p>
+      <p id="oneClass"></p>
+      <p id="oneOwned"></p>
+      <p id="oneWanted"></p>
+    </div>
+    <input type="button" value="Delete" id="deleteFirearm" style="background: rgb(216, 11, 11)"/>
+  
+    <!--    footer -->
+    <div data-role="footer" data-theme='a'>
+      <h1>Copyrigtht &copy;2022 by KG7PNH</h1>
+    </div>
+  
+  </div>
+  <!-- End of Details page -->
+
+</body>
+
+</html>
