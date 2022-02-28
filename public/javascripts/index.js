@@ -290,9 +290,6 @@ document.addEventListener("DOMContentLoaded", () => {
         let localParm = localStorage.getItem('parm'); // get the unique key back from the dictionairy
         let localID = GetArrayPointer(localParm); // map to which array element it is
 
-        // next step to avoid bug in jQuery Mobile,  force the movie array to be current
-        firearmArray = JSON.parse(localStorage.getItem('firearmArray'));
-
         document.getElementById("oneManufacturer").innerHTML = "Manufacturer: " + firearmArray[localID].Manufacturer;
         document.getElementById("oneModel").innerHTML = "Model: " + firearmArray[localID].Model;
         document.getElementById("oneCaliber").innerHTML = "Caliber: " + firearmArray[localID].Caliber;
