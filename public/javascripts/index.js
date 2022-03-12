@@ -224,26 +224,22 @@ document.addEventListener("DOMContentLoaded", () => {
      * Event listeners for "List Owned Firearms"
      */
     document.getElementById("buttonOwned").addEventListener("click", () => {
-        createList("divWantedFirearms", null, "Owned=true");
-
+        createList("divOwnedFirearms", null, "Owned=true");
         document.location.href = "index.html#ListOwned";
     });
 
     document.getElementById("buttonOwnedPistol").addEventListener("click", () => {
         createList("divOwnedFirearms", null, "Owned=true-Class=Pistol");
-
         document.location.href = "index.html#ListOwned";
     });
 
     document.getElementById("buttonOwnedRifle").addEventListener("click", () => {
         createList("divOwnedFirearms", null, "Owned=true-Class=Rifle");
-
         document.location.href = "index.html#ListOwned";
     });
 
     document.getElementById("buttonOwnedShotgun").addEventListener("click", () => {
         createList("divOwnedFirearms", null, "Owned=true-Class=Shotgun");
-
         document.location.href = "index.html#ListOwned";
     });
     // end of owned button events ************************************************************************
@@ -329,7 +325,6 @@ function createList(parent = "divAllFirearms", sortOrder = null, filters = null)
     if (filters) {
         url = url + '/' + filters;
     }
-
     $.ajax({
         async: false,
         type: 'GET',

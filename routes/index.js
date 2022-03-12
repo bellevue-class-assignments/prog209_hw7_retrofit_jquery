@@ -1,48 +1,11 @@
-var express = require('express');
+let express = require('express');
 const req = require('express/lib/request');
-var router = express.Router();
-
-/* The Firearm class. */
-class Firearm {
-    constructor(inputManufacturer,
-        inputModel,
-        inputClass,
-        inputCaliber,
-        inputOwned,
-        inputWanted) {
-        this.ID = createUUID();
-        // this.Action = inputAction;
-        this.Class = inputClass;
-        // this.Capacity = inputCapacity;
-        // this.Description = inputDescription;
-        // this.Length = inputLength;
-        // this.LengthBarrel = inputLengthBarrel;
-        // this.MagazineType = inputMagazineType;
-        this.Manufacturer = inputManufacturer;
-        this.Model = inputModel;
-        this.Caliber = inputCaliber;
-        this.Owned = inputOwned;
-        this.Wanted = inputWanted;
-        // this.URL = inputURL;
-        // this.Weight = inputWeight;
-        // this.YearEnd = inputYearEnd;
-        // this.YearStart = inputYearStart;
-    }
-}
-
-/* firearms array to hold all Firearm objects */
-let firearms = [];
-
-/* Seeding Firearm objects to the firearms array */
-firearms.push(new Firearm("Hekler & Koch", "VP70Z", "Pistol", "9mm Parabellum", true, false));
-firearms.push(new Firearm("Glock", "20", "Pistol", "10mm Auto", true, false));
-firearms.push(new Firearm("Smith & Wesson", "M&P Bodyguard 380", "Pistol", ".380 ACP", true, false));
-firearms.push(new Firearm("Springfield Armory", "XD45", "Pistol", ".45 ACP", true, false));
-firearms.push(new Firearm("Springfield Armory", "M1A SOCOM 16 CQB RIFLE", "Rifle", ".308 Remington", false, true));
-firearms.push(new Firearm("Ruger", "Precision 26\" MLOK", "Rifle", ".338 Lapua", false, true));
-firearms.push(new Firearm("Walther", "WA 2000", "Rifle", ".300 Winchester Magnum", false, true));
-firearms.push(new Firearm("Kel-Tec", "SU-16", "Rifle", "5.56mm NATO", false, true));
-firearms.push(new Firearm("CZ", "Bren 2 MS Carbine", "Rifle", "5.56mm NATO", false, true));
+let router = express.Router();
+let Firearm = require('../modules/firearm');
+let createUUID = require('../modules/utilities').createUUID;
+let findObjectByKey = require('../modules/utilities').findObjectByKey;
+let filterArray = require('../modules/utilities').filterArray;
+let firearms = require('../modules/datastore').firearms;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -126,70 +89,3 @@ router.get('/uuid', (req, res) => {
 })
 
 module.exports = router;
-
-/**
- * Function to generate a GUID/UUID using a pseudo-random number
- * @returns {string}    A GUID/UUID value
- */
-function createUUID() {
-    let s = [];
-    let hexDigits = "0123456789abcdef";
-    for (var i = 0; i < 36; i++) {
-        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
-    }
-    s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
-    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
-    s[8] = s[13] = s[18] = s[23] = "-";
-
-    let uuid = s.join("");
-    return uuid;
-}
-
-/**
- * Function to find an object within an array based on the value of an attribute
- * @param   {array}     array   An array to be searched
- * @param   {string}    key     The name of the object attribute
- * @param   {string}    value   The value of the key to search for
- * @returns {array}             An array containing items matching the filter
- */
-function filterArray(array, key, value) {
-    let filteredData = [];
-    for (var i = 0; i < array.length; i++) {
-        if (array[i][key] === stringToBoolean(value)) {
-            filteredData.push(array[i]);
-        }
-    }
-    return filteredData;
-}
-
-/**
- * Function to find an object within an array based on the value of an attribute
- * @param   {array}     array   An array to be searched
- * @param   {string}    key     The name of the object attribute
- * @param   {string}    value   The value of the key to search for
- * @returns {int}               The index in the array
- */
-function findObjectByKey(array, key, value) {
-    for (var i = 0; i < array.length; i++) {
-        if (array[i][key] === value) {
-            return i;
-        }
-    }
-    return null;
-}
-
-function stringToBoolean(str) {
-    switch (str.toLowerCase().trim()) {
-        case "true":
-        case "yes":
-        case "1":
-            return true;
-        case "false":
-        case "no":
-        case "0":
-        case null:
-            return false;
-        default:
-            return str;
-    }
-}
