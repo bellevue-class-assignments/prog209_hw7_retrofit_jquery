@@ -1,11 +1,16 @@
 let express = require('express');
 const req = require('express/lib/request');
 let router = express.Router();
+
+// local module requires
 let Firearm = require('../modules/firearm');
 let createUUID = require('../modules/utilities').createUUID;
 let findObjectByKey = require('../modules/utilities').findObjectByKey;
 let filterArray = require('../modules/utilities').filterArray;
+let dataPath = require('../modules/datastore').dataPath;
+let deleteFile = require('../modules/datastore').deleteFile;
 let firearms = require('../modules/datastore').firearms;
+let writeFile = require('../modules/datastore').writeFile;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -55,7 +60,12 @@ router.get('/firearm/:filter1([a-zA-Z]+=[a-zA-Z]+)-:filter2([a-zA-Z]+=[a-zA-Z]+)
 /* POST new firarm to array */
 router.post('/firearm', (req, res) => {
     let newFirearm = req.body;
+    let filePath = dataPath + '/' + newFirearm.ID + '.json';
+    console.log(newFirearm);
     firearms.push(newFirearm);
+
+    writeFile(filePath, newFirearm);
+
 
     let response = {
         status: 201,
@@ -67,6 +77,8 @@ router.post('/firearm', (req, res) => {
 /* DELETE firearm from array */
 router.delete('/firearm/:ID([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})', (req, res) => {
     let index = findObjectByKey(firearms, "ID", req.params.ID);
+    let filePath = dataPath + '/' + req.params.ID + '.json';
+    deleteFile(filePath);
     if (Number.isInteger(index)) {
         firearms.splice(index, 1);
 

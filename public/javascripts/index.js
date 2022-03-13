@@ -395,7 +395,7 @@ function createList(parent = "divAllFirearms", sortOrder = null, filters = null)
 
 
     // let ul = document.createElement('ul');
-    firearmArray.forEach(function(element, ) { // use handy array forEach method
+    firearmArray.forEach((element, ) => { // use handy array forEach method
 
         let detailsButton = document.createElement('button');
         detailsButton.innerText = "details";
