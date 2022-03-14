@@ -48,6 +48,11 @@ a {
     width: 100%;
 }
 
+.tableRow:hover {
+    background-color: grey;
+    color: whitesmoke;
+}
+
 .tableName {
     border-bottom-color: black;
     border-bottom-width: 1px;
@@ -68,4 +73,8 @@ a {
 .tableValue3,
 .tableButton {
     padding: 5px;
+}
+
+.oneFirearmLink {
+    cursor: pointer;
 }
