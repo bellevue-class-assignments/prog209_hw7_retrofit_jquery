@@ -396,7 +396,6 @@ function createList(parent = "divAllFirearms", sortOrder = null, filters = null)
 
     // let ul = document.createElement('ul');
     firearmArray.forEach((element, ) => { // use handy array forEach method
-
         let detailsButton = document.createElement('button');
         detailsButton.innerText = "details";
         detailsButton.classList.add("oneFirearm")
@@ -408,26 +407,38 @@ function createList(parent = "divAllFirearms", sortOrder = null, filters = null)
 
         let itemManufacturer = document.createElement('div');
         itemManufacturer.classList.add('tableValue');
+        itemManufacturer.classList.add('oneFirearmLink');
+        itemManufacturer.setAttribute("data-parm", element.ID);
         itemManufacturer.innerHTML = element.Manufacturer;
 
         let itemModel = document.createElement('div');
         itemModel.classList.add('tableValue');
+        itemModel.classList.add('oneFirearmLink');
+        itemModel.setAttribute("data-parm", element.ID);
         itemModel.innerHTML = element.Model;
 
         let itemCaliber = document.createElement('div');
         itemCaliber.classList.add('tableValue');
+        itemCaliber.classList.add('oneFirearmLink');
+        itemCaliber.setAttribute("data-parm", element.ID);
         itemCaliber.innerHTML = element.Caliber;
 
         let itemClass = document.createElement('div');
         itemClass.classList.add('tableValue');
+        itemClass.classList.add('oneFirearmLink');
+        itemClass.setAttribute("data-parm", element.ID);
         itemClass.innerHTML = element.Class;
 
         let itemOwned = document.createElement('div');
         itemOwned.classList.add('tableValue');
+        itemOwned.classList.add('oneFirearmLink');
+        itemOwned.setAttribute("data-parm", element.ID);
         itemOwned.innerHTML = element.Owned;
 
         let itemWanted = document.createElement('div');
         itemWanted.classList.add('tableValue');
+        itemWanted.classList.add('oneFirearmLink');
+        itemWanted.setAttribute("data-parm", element.ID);
         itemWanted.innerHTML = element.Wanted;
 
         let itemRow = document.createElement('div');
@@ -439,14 +450,13 @@ function createList(parent = "divAllFirearms", sortOrder = null, filters = null)
         itemRow.appendChild(itemClass);
         itemRow.appendChild(itemOwned);
         itemRow.appendChild(itemWanted);
-
         divFirearmList.appendChild(itemRow);
     });
 
     // now we have the HTML done to display out list, 
     // next we make them active buttons
     // set up an event for each new li item, 
-    var buttonArray = document.getElementsByClassName("oneFirearm");
+    let buttonArray = document.getElementsByClassName("oneFirearm");
     Array.from(buttonArray).forEach((element) => {
         element.addEventListener('click', () => {
             // get that data-parm we added for THIS particular li as we loop thru them
@@ -458,6 +468,20 @@ function createList(parent = "divAllFirearms", sortOrder = null, filters = null)
             document.location.href = "index.html#Details";
         });
     });
+
+    let rowArray = document.getElementsByClassName("oneFirearmLink");
+    Array.from(rowArray).forEach((element) => {
+        element.addEventListener('click', () => {
+            let parm = element.getAttribute("data-parm");
+            let indexes = GetArrayPointer(parm, 'ID');
+            for (let i = 0; i < indexes.length; i++) {
+                let item = firearmArray[indexes[i]];
+                let url = 'https://www.gunsamerica.com/Search.aspx?Keyword=' + encodeURIComponent(item.Manufacturer + ' ' + item.Model);
+                console.log(url);
+                window.open(url, '_blank');
+            }
+        })
+    })
 
 };
 
